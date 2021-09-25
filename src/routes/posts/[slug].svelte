@@ -7,7 +7,9 @@
    export async function load({ page, fetch, session, stuff }) {
     const { slug } = page.params
 		const url = `https://us-central1-shop-husseyfns.cloudfunctions.net/echo`;
-		const data = await fetch(url).then(r => r.json()).catch(e => null)
+		const data = await fetch(url, {
+      credentials: 'omit',
+    }).then(r => r.json()).catch(e => null)
     console.log('\n------')
     console.log('Building post', slug)
     console.log('------\n')
