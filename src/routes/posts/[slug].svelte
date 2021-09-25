@@ -1,4 +1,6 @@
 <script context="module">
+  const prerender = true
+
 	/**
 	 * @type {import('@sveltejs/kit').Load}
 	 */
