@@ -1,28 +1,22 @@
 <script context="module">
   export const prerender = true;
-  const randomInt = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min
 	/**
 	 * @type {import('@sveltejs/kit').Load}
 	 */
    export async function load({ page, fetch, session, stuff }) {
     const { slug } = page.params
-		const url = `https://us-central1-shop-husseyfns.cloudfunctions.net/echo`;
-		const data = await fetch({
-      url,
+		const post = await fetch({
+      url: `/posts/${slug}.json`,
       credentials: 'omit',
     }).then(r => r.json()).catch(e => null)
     console.log('\n------')
     console.log('Building post', slug)
     console.log('------\n')
 
-		if (data) {
+		if (post) {
 			return {
 				props: {
-					post: {
-            title: slug,
-            body: data._reqUid,
-            int: randomInt(100, 500),
-          },
+					post: post,
 				},
         maxage: 'public'
 			};
@@ -31,7 +25,7 @@
 
 		return {
 			status: 400,
-			error: new Error(`Could not load ${url}`)
+			error: new Error(`Could not load url`)
 		};
 	}
 </script>
