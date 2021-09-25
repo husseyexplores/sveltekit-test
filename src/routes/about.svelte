@@ -7,9 +7,7 @@
 		const url = `https://us-central1-shop-husseyfns.cloudfunctions.net/echo`;
 		const data = await fetch(url).then(r => r.json()).catch(e => null)
     console.log('\n------')
-    console.log('------')
     console.log('Building About page')
-    console.log('------')
     console.log('------\n')
 
 		if (data) {

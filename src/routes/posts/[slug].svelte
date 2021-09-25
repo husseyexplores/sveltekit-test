@@ -4,14 +4,18 @@
 	 * @type {import('@sveltejs/kit').Load}
 	 */
    export async function load({ page, fetch, session, stuff }) {
+    const {slug} = page.params
 		const url = `https://us-central1-shop-husseyfns.cloudfunctions.net/echo`;
 		const data = await fetch(url).then(r => r.json()).catch(e => null)
+    console.log('\n------')
+    console.log('Building post', slug)
+    console.log('------\n')
 
 		if (data) {
 			return {
 				props: {
 					post: {
-            title: `${page.params.slug}`,
+            title: slug,
             body: data._reqUid,
           }
 				}
