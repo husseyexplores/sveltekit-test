@@ -15,9 +15,7 @@
 		if (data) {
 			return {
 				props: {
-					post: {
-            content: data._reqUid,
-          }
+          content: data._reqUid,
 				}
 			};
 		}
