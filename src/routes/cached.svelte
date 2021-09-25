@@ -4,7 +4,8 @@
 	 */
    export async function load({ page, fetch, session, stuff }) {
 		const url = `https://us-central1-shop-husseyfns.cloudfunctions.net/echo`;
-		const data = await fetch(url, {
+		const data = await fetch({
+      url,
       credentials: 'omit',
     }).then(r => r.json()).catch(e => null)
 
