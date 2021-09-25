@@ -10,11 +10,7 @@
 		const data = await fetch({
       url,
       credentials: 'omit',
-    }).then(r => r.json()).catch(e => {
-      return {
-        _reqUid: randomInt(100, 500)
-      }
-    })
+    }).then(r => r.json()).catch(e => null)
     console.log('\n------')
     console.log('Building post', slug)
     console.log('------\n')
@@ -25,6 +21,7 @@
 					post: {
             title: slug,
             body: data._reqUid,
+            int: randomInt(100, 500),
           },
 				},
         maxage: 'public'
@@ -59,10 +56,11 @@
 {#if isPrerendered}
 <p>This post was pre-rendered during the build phase</p>
 {:else}
-<p>This post wa</p>
+<p>This post should be incremental build</p>
 {/if}
 
 <div class="cw">
+  <p class="c">{post.int}</p>
   <p class="c">{post.body}</p>
 </div>
 
