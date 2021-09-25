@@ -1,41 +1,36 @@
 <script context="module">
   export const prerender = true;
-
+  const randomInt = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min
 	/**
 	 * @type {import('@sveltejs/kit').Load}
 	 */
    export async function load({ page, fetch, session, stuff }) {
     const { slug } = page.params
-		// const url = `https://us-central1-shop-husseyfns.cloudfunctions.net/echo`;
-		// const data = await fetch({
-    //   url,
-    //   credentials: 'omit',
-    // }).then(r => r.json()).catch(e => null)
-    // console.log('\n------')
-    // console.log('Building post', slug)
-    // console.log('------\n')
+		const url = `https://us-central1-shop-husseyfns.cloudfunctions.net/echox`;
+		const data = await fetch({
+      url,
+      credentials: 'omit',
+    }).then(r => r.json()).catch(e => {
+      return {
+        _reqUid: randomInt(100, 500)
+      }
+    })
+    console.log('\n------')
+    console.log('Building post', slug)
+    console.log('------\n')
 
-		// if (data) {
-		// 	return {
-		// 		props: {
-		// 			post: {
-    //         title: slug,
-    //         body: data._reqUid,
-    //       },
-		// 		},
-    //     maxage: 'public'
-		// 	};
-    // }
-    const min = 20, max = 50
-    return {
-      props: {
-        post: {
-          title: slug,
-          body: Math.floor(Math.random() * (max - min + 1)) + min,
-        },
-      },
-      maxage: 30,
+		if (data) {
+			return {
+				props: {
+					post: {
+            title: slug,
+            body: data._reqUid,
+          },
+				},
+        maxage: 'public'
+			};
     }
+
 
 		return {
 			status: 400,
