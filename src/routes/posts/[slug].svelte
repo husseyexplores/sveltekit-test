@@ -18,8 +18,8 @@
             title: slug,
             body: data._reqUid,
           },
-          maxage: 'public'
-				}
+				},
+        maxage: 'public'
 			};
 		}
 
