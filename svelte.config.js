@@ -9,7 +9,7 @@ const config = {
     prerender: {
       crawl: false,
       enabled: true,
-      entries: ['*', '/posts/1', '/posts/2']
+      entries: [/*'*',*/ '/posts/1', '/posts/2']
     }
 	}
 };
