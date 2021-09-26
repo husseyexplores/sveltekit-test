@@ -11,6 +11,7 @@
     })
       .then(r => r.json())
       .catch(e => null)
+
     console.log('\n------')
     console.log('Building post', slug)
     console.log('------\n')
