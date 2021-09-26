@@ -3,7 +3,7 @@
   /**
    * @type {import('@sveltejs/kit').Load}
    */
-  export async function load({ page, fetch, session, stuff }) {
+  export async function load({ page, fetch }) {
     const { slug } = page.params
     const post = await fetch({
       url: `/posts/${slug}.json`,
