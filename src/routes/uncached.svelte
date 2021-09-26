@@ -1,9 +1,9 @@
 <script context="module">
-  export const prerender = true
+  // export const prerender = true
   /**
    * @type {import('@sveltejs/kit').Load}
    */
-  export async function load({ page, fetch, session, stuff }) {
+  export async function load({ fetch }) {
     const url = `https://us-central1-shop-husseyfns.cloudfunctions.net/echo`
     const data = await fetch({
       url,
