@@ -20,7 +20,7 @@
         props: {
           post: post,
         },
-        maxage: 'public',
+        maxage: 30,
       }
     }
 
