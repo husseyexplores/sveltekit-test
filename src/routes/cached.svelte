@@ -1,28 +1,30 @@
 <script context="module">
-	/**
-	 * @type {import('@sveltejs/kit').Load}
-	 */
-   export async function load({ page, fetch, session, stuff }) {
-		const url = `https://us-central1-shop-husseyfns.cloudfunctions.net/echo`;
-		const data = await fetch({
+  /**
+   * @type {import('@sveltejs/kit').Load}
+   */
+  export async function load({ page, fetch, session, stuff }) {
+    const url = `https://us-central1-shop-husseyfns.cloudfunctions.net/echo`
+    const data = await fetch({
       url,
       credentials: 'omit',
-    }).then(r => r.json()).catch(e => null)
+    })
+      .then(r => r.json())
+      .catch(e => null)
 
-		if (data) {
-			return {
-				props: {
+    if (data) {
+      return {
+        props: {
           body: data._reqUid,
         },
-        maxage: 'public'
-			};
-		}
+        maxage: 30,
+      }
+    }
 
-		return {
-			status: 400,
-			error: new Error(`Could not load ${url}`)
-		};
-	}
+    return {
+      status: 400,
+      error: new Error(`Could not load ${url}`),
+    }
+  }
 </script>
 
 <script>
@@ -32,11 +34,14 @@
 <h1>Uncached</h1>
 
 <div style="font-family: monospace; margin: 10px 0;">
-  <p>Prendered = false  (was not pre-rendered during build phase)</p>
-  <p>maxage = public (Hoping to build this once the request comes and cache it for subsequent requests)</p>
+  <p>Prendered = false (was not pre-rendered during build phase)</p>
+  <p>
+    maxage = public (Hoping to build this once the request comes and cache it for subsequent
+    requests)
+  </p>
 </div>
 
-<hr>
+<hr />
 <p>
   The following data <em>should not</em> change upon page refresh. (Expecting to mimic Nextjs ISR)
 </p>
@@ -46,7 +51,9 @@
 </div>
 
 <style>
-  .cw { margin-top: 20px; }
+  .cw {
+    margin-top: 20px;
+  }
   .c {
     display: inline-block;
     background: rgb(22, 22, 22);

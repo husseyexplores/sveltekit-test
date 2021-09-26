@@ -1,27 +1,29 @@
 <script context="module">
-	/**
-	 * @type {import('@sveltejs/kit').Load}
-	 */
-   export async function load({ page, fetch, session, stuff }) {
-		const url = `https://us-central1-shop-husseyfns.cloudfunctions.net/echo`;
-		const data = await fetch({
+  /**
+   * @type {import('@sveltejs/kit').Load}
+   */
+  export async function load({ page, fetch, session, stuff }) {
+    const url = `https://us-central1-shop-husseyfns.cloudfunctions.net/echo`
+    const data = await fetch({
       url,
       credentials: 'omit',
-    }).then(r => r.json()).catch(e => null)
+    })
+      .then(r => r.json())
+      .catch(e => null)
 
-		if (data) {
-			return {
-				props: {
+    if (data) {
+      return {
+        props: {
           body: data._reqUid,
-				}
-			};
-		}
+        },
+      }
+    }
 
-		return {
-			status: 400,
-			error: new Error(`Could not load ${url}`)
-		};
-	}
+    return {
+      status: 400,
+      error: new Error(`Could not load ${url}`),
+    }
+  }
 </script>
 
 <script>
@@ -35,7 +37,7 @@
   <p>maxage = not defined (Hoping to serve fresh data every times this page is requested)</p>
 </div>
 
-<hr>
+<hr />
 <p>
   The following data <em>should</em> change upon every page refresh
 </p>
@@ -45,7 +47,9 @@
 </div>
 
 <style>
-  .cw { margin-top: 20px; }
+  .cw {
+    margin-top: 20px;
+  }
   .c {
     display: inline-block;
     background: rgb(22, 22, 22);

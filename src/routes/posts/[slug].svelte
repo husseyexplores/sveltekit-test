@@ -1,33 +1,34 @@
 <script context="module">
-  export const prerender = true;
-	/**
-	 * @type {import('@sveltejs/kit').Load}
-	 */
-   export async function load({ page, fetch, session, stuff }) {
+  export const prerender = true
+  /**
+   * @type {import('@sveltejs/kit').Load}
+   */
+  export async function load({ page, fetch, session, stuff }) {
     const { slug } = page.params
-		const post = await fetch({
+    const post = await fetch({
       url: `/posts/${slug}.json`,
       credentials: 'omit',
-    }).then(r => r.json()).catch(e => null)
+    })
+      .then(r => r.json())
+      .catch(e => null)
     console.log('\n------')
     console.log('Building post', slug)
     console.log('------\n')
 
-		if (post) {
-			return {
-				props: {
-					post: post,
-				},
-        maxage: 'public'
-			};
+    if (post) {
+      return {
+        props: {
+          post: post,
+        },
+        maxage: 'public',
+      }
     }
 
-
-		return {
-			status: 400,
-			error: new Error(`Could not load url`)
-		};
-	}
+    return {
+      status: 400,
+      error: new Error(`Could not load url`),
+    }
+  }
 </script>
 
 <script>
@@ -39,18 +40,23 @@
 <h1>Post: {post.title}</h1>
 
 <div style="font-family: monospace; margin: 10px 0;">
-  <p>Prendered = {isPrerendered.toString()} {isPrerendered ?
-  '(was pre-rendered during build phase)' :
-  '(was not pre-rendered during build phase)'}</p>
-  <p>maxage = public {!isPrerendered ?
-  '(hoping to build this once the request comes and cache it for subsequent requests)' :
-  ''}</p>
+  <p>
+    Prendered = {isPrerendered.toString()}
+    {isPrerendered
+      ? '(was pre-rendered during build phase)'
+      : '(was not pre-rendered during build phase)'}
+  </p>
+  <p>
+    maxage = public {!isPrerendered
+      ? '(hoping to build this once the request comes and cache it for subsequent requests)'
+      : ''}
+  </p>
 </div>
 
 {#if isPrerendered}
-<p>This post was pre-rendered during the build phase</p>
+  <p>This post was pre-rendered during the build phase</p>
 {:else}
-<p>This post should be incremental build</p>
+  <p>This post should be incremental build</p>
 {/if}
 
 <div class="cw">
@@ -59,7 +65,9 @@
 </div>
 
 <style>
-  .cw { margin-top: 20px; }
+  .cw {
+    margin-top: 20px;
+  }
   .c {
     display: inline-block;
     background: rgb(22, 22, 22);
@@ -68,4 +76,3 @@
     font-family: monospace;
   }
 </style>
-

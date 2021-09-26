@@ -1,17 +1,17 @@
-import adapterVercel from '@sveltejs/adapter-vercel';
+import adapterVercel from '@sveltejs/adapter-vercel'
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
-	kit: {
+  kit: {
     // hydrate the <div id="svelte"> element in src/app.html
     adapter: adapterVercel(),
     target: '#svelte',
     prerender: {
       crawl: false,
       enabled: true,
-      entries: [/*'*',*/ '/posts/1', '/posts/2']
-    }
-	}
-};
+      entries: [/*'*',*/ '/posts/1', '/posts/2'],
+    },
+  },
+}
 
-export default config;
+export default config
